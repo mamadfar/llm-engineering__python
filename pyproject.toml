@@ -28,3 +28,12 @@ dev = [
     "ipython>=9.18.1",
     "jupyter>=1.1.1",
 ]
+
+[tool.pyrefly]
+# Jupyter puts a notebook's own folder on sys.path, so `import scraper` means
+# the scraper.py beside that notebook. Search upward from each file so a new
+# week folder resolves the same way without being added here.
+enable-fallback-search-path = true
+
+[tool.pyrefly.errors]
+fallback-search-path-relative-import = false

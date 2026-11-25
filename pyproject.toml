@@ -27,6 +27,7 @@ dev = [
     "ipykernel>=7.4.0",
     "ipython>=9.18.1",
     "jupyter>=1.1.1",
+    "tiktoken>=0.14.0",
 ]
 
 [tool.pyrefly]

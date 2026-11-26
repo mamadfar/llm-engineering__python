@@ -46,7 +46,7 @@ class Website:
     def contents(self) -> str:
         if not self.soup:
             return ""
-        title = self.soup.title.string if self.soup.title else "No title found"
+        title = self.soup.title.string if self.soup.title and self.soup.title.string else "No title found"
         if self.soup.body:
             for irrelevant in self.soup.body(["script", "style", "img", "input"]):
                 irrelevant.decompose()
@@ -61,7 +61,7 @@ class Website:
         hrefs = []
         for link in self.soup.find_all("a"):
             href = link.get("href")
-            if not href or href.startswith("javascript:", "mailto:", "tel:", "#", "data:"):
+            if not isinstance(href, str) or not href or href.startswith(("javascript:", "mailto:", "tel:", "#", "data:")):
                 continue
             hrefs.append(urljoin(self.url, href))
         return list(dict.fromkeys(hrefs))
